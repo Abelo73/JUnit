@@ -2,7 +2,6 @@ package org.act.junit.service;
 
 import org.act.junit.entity.User;
 import org.act.junit.repository.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
