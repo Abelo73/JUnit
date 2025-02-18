@@ -11,9 +11,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -47,6 +47,22 @@ public class UserServiceTest {
 
         assertEquals(1, users.size());
         assertEquals("John", users.get(0).getName());
+    }
+
+    @Test
+    void testGetUserByIdFound(){
+        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+        Optional<User> foundUser = userService.getUserById(1L);
+        assertTrue(foundUser.isPresent());
+        assertEquals("John", foundUser.get().getName());
+    }
+
+    @Test
+    void testGetUserByIdNotFound(){
+        when(userRepository.findById(2L)).thenReturn(Optional.empty());
+
+        Optional<User> foundUser = userService.getUserById(2L);
+        assertFalse(foundUser.isPresent());
     }
 
     @Test
