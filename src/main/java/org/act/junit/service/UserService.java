@@ -3,6 +3,7 @@ package org.act.junit.service;
 import org.act.junit.entity.User;
 import org.act.junit.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,8 @@ public class UserService {
                     user.setAge(userDetails.getAge());
 
                     return userRepository.save(user);
-                }).orElseThrow(() ->new RuntimeException("User not found with id: "+id));
+                })
+                .orElseThrow(() -> new RuntimeException());
    }
 
     public ResponseEntity<Object> deleteUser(Long id) {
